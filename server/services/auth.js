@@ -1,8 +1,8 @@
 const jwt = require('express-jwt');
 const jwksRsa = require('jwks-rsa');
 
-// const config = require('../config');
-// const NAMESPACE = config.NAMESPACE;
+const config = require('../config');
+const NAMESPACE = config.NAMESPACE;
 
 // MIDDLEWARE
 exports.checkJWT = jwt({

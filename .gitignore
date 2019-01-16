@@ -1,2 +1,5 @@
 /node_modules
+/server/.next
 /.next
+/config
+/readmy.md
