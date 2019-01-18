@@ -21,11 +21,10 @@ class Portfolio extends React.Component {
     }
 
     render() {
-        // debugger;
         // console.log(this.props);
         const {portfolio} = this.props;
         return (
-            <BaseLayout {...this.props.auth} >
+            <BaseLayout title="Velko Nedev - Newest Blogs to Read" {...this.props.auth} >
                 <BasePage>
                     <h1> {portfolio.title} </h1>
                     <p> BODY: {portfolio.body} </p>

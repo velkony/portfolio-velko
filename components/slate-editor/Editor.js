@@ -12,18 +12,25 @@ import { renderMark, renderNode } from './renderers';
 import Html from 'slate-html-serializer';
 import { rules } from './rules';
 const html = new Html({ rules });
+import { Value } from 'slate';
 
 
 export default class SlateEditor extends React.Component {
     // Set the initial value when the app is first constructed.
     state = {
-        value: initialValue,
+        // value: initialValue,
+        value: Value.create(),
         isLoaded: false
     };
 
     componentDidMount() {
+
+        const valueFromProps = this.props.initialValue;
+
+        const value = valueFromProps ? Value.fromJSON(html.deserialize(valueFromProps)) : Value.fromJSON(initialValue);
+
         this.updateMenu();
-        this.setState({isLoaded: true});
+        this.setState({isLoaded: true, value});
     }
 
     componentDidUpdate = () => {
@@ -34,6 +41,19 @@ export default class SlateEditor extends React.Component {
     onChange = ({ value }) => {
         this.setState({ value })
     };
+
+    onKeyDown = (event, change, next) => {
+        const {isLoading} = this.props;
+
+        if (!isLoading && event.which === 83 && (event.ctrlKey || event.metaKey)) {
+            event.preventDefault();
+            this.save();
+            return;
+        }
+
+        next();
+    };
+
 
     updateMenu = () => {
         const menu = this.menu;
@@ -76,11 +96,11 @@ export default class SlateEditor extends React.Component {
 
     save() {
         const { value } = this.state;
-        const { save } = this.props;
+        const { save, isLoading } = this.props;
         const headingValues = this.getTitle();
         const text = html.serialize(value);
 
-        save(text, headingValues);
+        !isLoading && save(text, headingValues);
     }
 
 
@@ -98,6 +118,7 @@ export default class SlateEditor extends React.Component {
                         placeholder="Enter some text..."
                         value={this.state.value}
                         onChange={this.onChange}
+                        onKeyDown={this.onKeyDown}
                         renderMark={renderMark}
                         renderNode={renderNode}
                         renderEditor={this.renderEditor}

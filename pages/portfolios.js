@@ -89,11 +89,11 @@ class Portfolios extends React.Component {
         const { isAuthenticated, isSiteOwner } = this.props.auth;
 
         return (
-            <BaseLayout {...this.props.auth} >
+            <BaseLayout {...this.props.auth} tittle="Velko Nedev - Learn About My Experience" >
                 <BasePage className="portfolio-page" title="Portfolios">
                     { isAuthenticated && isSiteOwner &&
 
-                        <Button onClick={() => Router.pushRoute('/portfolioNew')}
+                        <Button onClick={() => Router.pushRoute('/portfolios/new')}
                                 color="success"
                                 className="create-port-btm">Create Portfolio
                         </Button>
