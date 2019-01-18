@@ -1,10 +1,13 @@
 @import './shared/fonts';
 @import './shared/colors';
+@import './shared/mixins';
 
 // PAGES
 @import './index';
 @import './portfolios';
 @import './blogs';
+@import './about';
+@import './cv';
 
 // COMPONENTS
 @import './header';
@@ -38,8 +41,8 @@ html, body {
 
 .base-page {
   padding: 150px 0 100px 0;
-  color: white;
-  backgroud-color: #ecedee;
+  color: black;
+  background-color: #ecedee;
   min-height: 100vh;
 
   .page-header {

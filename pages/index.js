@@ -9,24 +9,60 @@ class Index extends React.Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            isFlipping: false
+        };
+
         this.roles = ['Developer', 'React', 'Angular', 'Course Creater'];
+    }
+
+    componentDidMount() {
+        this.animateCard();
+    }
+
+
+    componentWillUnmount() {
+        this.cardAnimationInterval && clearInterval(this.cardAnimationInterval);
+    }
+
+    animateCard() {
+        this.cardAnimationInterval = setInterval(() => {
+            this.setState({
+                isFlipping: !this.state.isFlipping
+            });
+        }, 10000);
     }
 
     render() {
         const { isAuthenticated, user } = this.props.auth;
+        const { isFlipping } = this.state;
 
         return (
-            <BaseLayout className="cover" {...this.props.auth} headerType="index" >
-                <div className="main-section">
+            <BaseLayout className={`cover ${isFlipping ? 'cover-1' : 'cover-0'}`} {...this.props.auth}
+                        headerType="index"
+                        titlr="Velko Nedev">
+                <div className="main-section Portfolio">
                     <div className="background-image">
-                        <img src="/static/images/background-index.png" />
+                        <img alt="Guy programming welcome picture" src="/static/images/background-index.png" />
                     </div>
 
                     <Container>
                         <Row>
                             <Col md="6">
                                 <div className="hero-section">
-                                    <div className={`flipper`}>
+                                    <div className={`flipper ${isFlipping ? 'isFliping' : ''}`}>
+                                        <div className="front">
+                                            <div className="hero-section-content">
+                                                <h2> Full Stack Web Developer </h2>
+                                                <div className="hero-section-content-intro">
+                                                    Have a look at my portfolio and job history.
+                                                </div>
+                                            </div>
+                                            <img alt="Guy programming welcome picture" className="image" src="/static/images/section-1.png"/>
+                                            <div className="shadow-custom shadow-custom-2">
+                                                <div className="shadow-inner"> </div>
+                                            </div>
+                                        </div>
                                         <div className="back">
                                             <div className="hero-section-content">
                                                 <h2> Full Stack Web Developer </h2>
@@ -34,7 +70,7 @@ class Index extends React.Component {
                                                     Have a look at my portfolio and job history.
                                                 </div>
                                             </div>
-                                            <img className="image" src="/static/images/section-1.png"/>
+                                            <img className="image" src="/static/images/section-2.png"/>
                                             <div className="shadow-custom">
                                                 <div className="shadow-inner"> </div>
                                             </div>
@@ -67,9 +103,9 @@ class Index extends React.Component {
 
 
                                 <div className="hero-welcome-bio">
-                                    <h1>
+                                    <h2>
                                         Let's take a look on my work.
-                                    </h1>
+                                    </h2>
                                 </div>
                             </Col>
                         </Row>
