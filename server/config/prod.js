@@ -1,5 +1,6 @@
 module.exports = {
-    DB_URL: process.env.DB_URI
+    DB_URL: process.env.DB_URI,
+    NAMESPACE: 'https://velkonedev.herokuapp.com'
 };
 
 // module.exports = {
