@@ -2,7 +2,7 @@ import React from 'react'
 import App, { Container } from 'next/app'
 import { ToastContainer } from 'react-toastify';
 import auth0 from '../services/auth0';
-import Fonts from '../helpers/Fonts';
+// import Fonts from '../helpers/Fonts';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/main.scss';
@@ -29,7 +29,7 @@ export default class MyApp extends App {
     }
 
     componentDidMount() {
-        Fonts();
+        // Fonts();
     }
 
     render () {
